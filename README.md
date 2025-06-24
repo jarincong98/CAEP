@@ -1,2 +1,13 @@
-# CAEP
-**Repository Description (GitHub):**  > Codebase for *CAEP - Curso Avanzado en Economía para Profesores* by Banco de la República. > Includes resources for DSGE model development: Small Open Economy (SOE) models, New Keynesian (NK) frameworks, data handling, estimation, and forecasting.
+
+# CAEP – Curso Avanzado en Economía para Profesores
+
+This repository contains the code and materials developed for **CAEP (Curso Avanzado en Economía para Profesores)**, an initiative by **Banco de la República**.
+
+The content focuses on the development and application of **Dynamic Stochastic General Equilibrium (DSGE)** models, including:
+
+* Small Open Economy (SOE) models
+* New Keynesian (NK) models
+* Model-based data management
+* Estimation techniques (e.g., Bayesian methods)
+* Forecasting using DSGE frameworks
+
