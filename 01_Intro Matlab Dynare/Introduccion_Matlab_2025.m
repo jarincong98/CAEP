@@ -30,8 +30,8 @@ clc           % Borra todo lo que esta en el Command Window
 % superior del Editor. Si se quiere correr solo una sección, se selecciona,
 % se da click derecho y se escoge "Evaluate selection"
 
-%Se debe tener cuidado al nombrar las variables, pues Matlab si hace una
-%diferencia entre mayusculas y minusculas
+% Se debe tener cuidado al nombrar las variables, pues Matlab si hace una
+% diferencia entre mayusculas y minusculas
 
 
 %%  Sección 2: Operaciones basicas entre escalares
@@ -140,7 +140,7 @@ index = find(isnan(AA))
 index = find(isfinite(AA))
 
 
-% ----------------------------------------------------------------------------------------------------------------------------------------------------------
+%% ----------------------------------------------------------------------------------------------------------------------------------------------------------
 %   Loops y Condicionales
 % ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -183,7 +183,7 @@ end
 
 
 
-% ----------------------------------------------------------------------------------------------------------------------------------------------------------
+%% ----------------------------------------------------------------------------------------------------------------------------------------------------------
 % Plots and structures
 % ----------------------------------------------------------------------------------------------------------------------------------------------------------
 

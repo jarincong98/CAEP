@@ -1,0 +1,168 @@
+Starting Dynare (version 6.3).
+Calling Dynare with arguments: none
+Starting preprocessing of the model file ...
+Found 16 equation(s).
+Evaluating expressions...
+Computing static model derivatives (order 1).
+Normalizing the static model...
+Finding the optimal block decomposition of the static model...
+6 block(s) found:
+  5 recursive block(s) and 1 simultaneous block(s).
+  the largest simultaneous block has 10 equation(s)
+                                 and 10 feedback variable(s).
+Computing dynamic model derivatives (order 2).
+Normalizing the dynamic model...
+Finding the optimal block decomposition of the dynamic model...
+3 block(s) found:
+  2 recursive block(s) and 1 simultaneous block(s).
+  the largest simultaneous block has 11 equation(s)
+                                 and 9 feedback variable(s).
+Preprocessing completed.
+Preprocessing time: 0h00m00s.
+DYNARE_SOLVE (solve_algo=2|4): number of blocks = 7
+MODEL_DIAGNOSTICS:  No obvious problems with this mod-file were detected.
+
+
+Residuals of the static equations:
+All residuals are zero
+
+
+
+EIGENVALUES:
+         Modulus             Real        Imaginary
+               0                0                0
+            0.75             0.75                0
+            0.75             0.75                0
+          0.8362           0.8362                0
+           1.234            1.234                0
+       1.621e+16       -1.621e+16                0
+       1.199e+18       -1.199e+18                0
+       4.814e+18       -4.814e+18                0
+       6.478e+18       -6.478e+18                0
+       3.746e+19        3.746e+19                0
+       3.972e+21        3.972e+21                0
+
+There are 7 eigenvalue(s) larger than 1 in modulus for 7 forward-looking variable(s)
+The rank condition is verified.
+
+
+STEADY-STATE RESULTS:
+
+K       		 2.87239
+C       		 1.01501
+L       		 0.876835
+P       		 1.26248
+I       		 0.287239
+lambda  		 0.76884
+W       		 1
+R_K     		 0.152632
+MC      		 1.00999
+Upsilon 		 0
+q       		 1.30225
+mu      		 1.00999
+Pi_q    		 0.328813
+A       		 1
+pi      		 0
+Z_D     		 1
+
+MODEL SUMMARY
+
+  Number of variables:         16
+  Number of stochastic shocks: 2
+  Number of state variables:   4
+  Number of jumpers:           7
+  Number of static variables:  8
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+Variables       eps_A     eps_D
+eps_A        0.010000  0.000000
+eps_D        0.000000  0.100000
+
+POLICY AND TRANSITION FUNCTIONS
+                                   A               q               C               I               K               L              MC               P              pi
+Constant                    1.000000        1.325540        0.983234        0.342306        2.927458        0.900362        1.019021        1.273776        0.008944
+(correction)                       0        0.023294       -0.031773        0.055067        0.055067        0.023527        0.009033        0.011291        0.008944
+A(-1)                       0.750000        0.942821        0.426818        0.516003        0.516003       -0.034202       -0.770623       -0.963278       -0.763002
+K(-1)                              0        0.085123        0.148917       -0.063794        0.836206       -0.066658       -0.142800       -0.178500       -0.141388
+P(-1)                              0               0               0               0               0               0               0               0       -0.792089
+Z_D(-1)                            0        0.227757        0.069968        0.157789        0.157789        0.230031        0.088321        0.110401        0.087448
+eps_A                       1.000000        1.257095        0.569090        0.688005        0.688005       -0.045602       -1.027497       -1.284371       -1.017336
+eps_D                              0        0.303676        0.093290        0.210385        0.210385        0.306709        0.117761        0.147202        0.116597
+A(-1),A(-1)                -0.093750       -0.149195       -0.097639       -0.051556       -0.064869       -0.001506        0.671904        0.839880        0.665260
+K(-1),A(-1)                        0        0.093550        0.019081        0.074469        0.082921        0.034840        0.121335        0.151669        0.120135
+K(-1),K(-1)                        0       -0.012857       -0.013878        0.001021       -0.000320        0.013307        0.034634        0.043292        0.034291
+P(-1),A(-1)                        0               0               0               0               0               0               0               0        0.604365
+P(-1),K(-1)                        0               0               0               0               0               0               0               0        0.111992
+P(-1),P(-1)                        0               0               0               0               0               0               0               0        0.627405
+Z_D(-1),A(-1)                      0        0.150249        0.049399        0.100850        0.092708       -0.023765       -0.073069       -0.091336       -0.072346
+Z_D(-1),K(-1)                      0        0.018933        0.004747        0.014186        0.016770       -0.013402       -0.010919       -0.013648       -0.010811
+Z_D(-1),P(-1)                      0               0               0               0               0               0               0               0       -0.069266
+Z_D(-1),Z_D(-1)                    0       -0.095307       -0.030737       -0.064570       -0.065814       -0.086201       -0.040820       -0.051026       -0.040417
+eps_A,eps_A                        0       -0.055720       -0.078732        0.023012       -0.000656       -0.010278        1.023247        1.279059        1.013128
+eps_D,eps_A                        0        0.267109        0.087820        0.179289        0.164814       -0.042249       -0.129900       -0.162375       -0.128615
+eps_D,eps_D                        0       -0.118822       -0.039096       -0.079726       -0.081939       -0.102128       -0.052943       -0.066179       -0.052419
+A(-1),eps_A                 0.750000        0.859242        0.308720        0.550521        0.515020       -0.049620        0.764248        0.955310        0.756690
+A(-1),eps_D                        0        0.200332        0.065865        0.134467        0.123611       -0.031686       -0.097425       -0.121781       -0.096461
+K(-1),eps_A                        0        0.124733        0.025441        0.099292        0.110561        0.046453        0.161780        0.202225        0.160180
+K(-1),eps_D                        0        0.025244        0.006330        0.018914        0.022360       -0.017869       -0.014558       -0.018198       -0.014414
+P(-1),eps_A                        0               0               0               0               0               0               0               0        0.805821
+P(-1),eps_D                        0               0               0               0               0               0               0               0       -0.092355
+Z_D(-1),eps_A                      0        0.200332        0.065865        0.134467        0.123611       -0.031686       -0.097425       -0.121781       -0.096461
+Z_D(-1),eps_D                      0        0.049524        0.011324        0.038200        0.034880        0.076839        0.008907        0.011133        0.008819
+
+
+MOMENTS OF SIMULATED VARIABLES
+VARIABLE              MEAN       STD. DEV.        VARIANCE        SKEWNESS        KURTOSIS
+A                 1.007867        0.152520        0.023262        0.339474        0.421484
+q                 1.291466        0.285885        0.081730        0.616514        0.937677
+C                 0.986920        0.165083        0.027252        0.545156        0.595830
+I                 0.304546        0.138428        0.019162        0.469425        1.098334
+K                 3.032108        0.633179        0.400916        1.061777        2.035910
+L                 0.836721        0.125293        0.015698       -0.214345       -0.085692
+MC                1.005573        0.180816        0.032694        0.690705        0.199480
+P                 1.256966        0.226020        0.051085        0.690705        0.199480
+pi                0.003895        0.106139        0.011265        0.449990        0.228884
+
+
+CORRELATION OF SIMULATED VARIABLES
+VARIABLE          A        q        C        I        K        L       MC        P       pi
+A            1.0000   0.8102   0.7692   0.7559   0.5267  -0.0020  -0.8973  -0.8973  -0.5230
+q            0.8102   1.0000   0.9516   0.9304   0.8036   0.5037  -0.6796  -0.6796  -0.3509
+C            0.7692   0.9516   1.0000   0.7727   0.9330   0.3421  -0.7570  -0.7570  -0.2870
+I            0.7559   0.9304   0.7727   1.0000   0.5470   0.6322  -0.5007  -0.5007  -0.3824
+K            0.5267   0.8036   0.9330   0.5470   1.0000   0.2946  -0.6037  -0.6037  -0.1176
+L           -0.0020   0.5037   0.3421   0.6322   0.2946   1.0000   0.2299   0.2299   0.0355
+MC          -0.8973  -0.6796  -0.7570  -0.5007  -0.6037   0.2299   1.0000   1.0000   0.4443
+P           -0.8973  -0.6796  -0.7570  -0.5007  -0.6037   0.2299   1.0000   1.0000   0.4443
+pi          -0.5230  -0.3509  -0.2870  -0.3824  -0.1176   0.0355   0.4443   0.4443   1.0000
+
+
+AUTOCORRELATION OF SIMULATED VARIABLES
+VARIABLE          1        2        3        4        5
+A            0.7484   0.5371   0.3954   0.2917   0.2092
+q            0.8160   0.6608   0.5568   0.4798   0.4009
+C            0.9145   0.8223   0.7401   0.6630   0.5839
+I            0.6869   0.4497   0.3170   0.2379   0.1578
+K            0.9778   0.9308   0.8702   0.8023   0.7306
+L            0.6679   0.4485   0.3292   0.2181   0.1451
+MC           0.8065   0.6371   0.5183   0.4030   0.3144
+P            0.8065   0.6371   0.5183   0.4030   0.3144
+pi          -0.0280  -0.0725  -0.0110  -0.0549   0.0226
+
+
+
+VARIANCE DECOMPOSITION SIMULATING ONE SHOCK AT A TIME (in percent)
+                 eps_A             eps_D  Tot. lin. contr.
+A               100.11              0.00            100.11
+q                57.57             29.89             87.46
+C                57.95             26.02             83.97
+I                54.36             38.11             92.47
+K                42.89             33.55             76.43
+L                 3.86            100.26            104.11
+MC               88.47              7.63             96.10
+P                88.47              7.63             96.10
+pi               81.68             18.79            100.47
+Note: numbers do not add up to 100 due to i) non-zero correlation of simulated shocks in small samples and ii) nonlinearity
+
+Total computing time : 0h00m06s
