@@ -1,0 +1,121 @@
+Starting Dynare (version 6.3).
+Calling Dynare with arguments: none
+Starting preprocessing of the model file ...
+Found 8 equation(s).
+Evaluating expressions...
+Computing static model derivatives (order 1).
+Normalizing the static model...
+Finding the optimal block decomposition of the static model...
+3 block(s) found:
+  2 recursive block(s) and 1 simultaneous block(s).
+  the largest simultaneous block has 5 equation(s)
+                                 and 5 feedback variable(s).
+Computing dynamic model derivatives (order 2).
+Normalizing the dynamic model...
+Finding the optimal block decomposition of the dynamic model...
+3 block(s) found:
+  2 recursive block(s) and 1 simultaneous block(s).
+  the largest simultaneous block has 5 equation(s)
+                                 and 5 feedback variable(s).
+Preprocessing completed.
+Preprocessing time: 0h00m00s.
+
+STEADY-STATE RESULTS:
+
+c   		 0.993377
+n   		 0.355596
+z   		 0
+k   		 15.8548
+i   		 0.630819
+y   		 1.6242
+w   		 2.74052
+y_n 		 4.56754
+
+EIGENVALUES:
+         Modulus             Real        Imaginary
+            0.95             0.95                0
+          0.9536           0.9536                0
+            1.05             1.05                0
+       4.311e+34       -4.311e+34                0
+
+There are 2 eigenvalue(s) larger than 1 in modulus for 2 forward-looking variable(s)
+The rank condition is verified.
+
+
+
+Residuals of the static equations:
+Equation number 1: TMS Consumo Ocio       :       0.000000
+Equation number 2: Euler Capital          :       0.000000
+Equation number 3: Eq. Movimiento Capital :       0.000000
+Equation number 4: Eq. Agregada Macro     :       0.000000
+Equation number 5: Funcion de Produccion  :       0.000000
+Equation number 6: AR-1 de PTF            :       0.000000
+Equation number 7: Salario Real           :       0.000000
+Equation number 8: PIB sobre Trabajo      :       0.000000
+
+
+
+MODEL SUMMARY
+
+  Number of variables:         8
+  Number of stochastic shocks: 1
+  Number of state variables:   2
+  Number of jumpers:           2
+  Number of static variables:  4
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+Variables     epsilon
+epsilon      0.000000
+
+POLICY AND TRANSITION FUNCTIONS
+                                   c               n               z               k               i               y               w             y_n
+Constant                    0.993377        0.355596               0       15.854832        0.630820        1.624197        2.740522        4.567536
+z(-1)                       0.372702        0.233427        0.950000        1.840077        1.891208        2.263910        2.020926        3.368210
+k(-1)                       0.036803       -0.004416               0        0.953575       -0.007928        0.028875        0.082753        0.137922
+epsilon                     0.295062       -0.110969        1.000000       -0.582974       -0.599173       -0.304112        0.342087        0.570145
+z(-1),z(-1)                 0.135395       -0.016939               0        1.153943        1.186007        1.321403        1.033544        1.722574
+k(-1),z(-1)                 0.008011        0.001889               0        0.044133        0.045359        0.053370        0.046263        0.077106
+k(-1),k(-1)                -0.000404        0.000114               0       -0.000385       -0.000395       -0.000799       -0.001197       -0.001995
+epsilon,epsilon             0.075796       -0.010288               0       -0.119647       -0.122972       -0.047176        0.106443        0.177405
+z(-1),epsilon               0.157699       -0.024983               0       -0.438247       -0.450424       -0.292725        0.104719        0.174532
+k(-1),epsilon               0.008164        0.001179               0       -0.013735       -0.014116       -0.005952        0.010943        0.018239
+
+
+APPROXIMATED THEORETICAL MOMENTS
+VARIABLE         MEAN  STD. DEV.   VARIANCE
+c              0.9934     0.0029     0.0000
+n              0.3556     0.0004     0.0000
+z              0.0000     0.0022     0.0000
+k             15.8550     0.0607     0.0037
+i              0.6308     0.0040     0.0000
+y              1.6242     0.0064     0.0000
+w              2.7405     0.0087     0.0001
+y_n            4.5676     0.0145     0.0002
+
+
+
+APPROXIMATED MATRIX OF CORRELATIONS
+Variables         c       n       z       k       i       y       w     y_n
+c            1.0000  0.3858  0.7912  0.9826  0.7406  0.9089  0.9831  0.9831
+n            0.3858  1.0000  0.7469  0.2449  0.9057  0.7355  0.5482  0.5482
+z            0.7912  0.7469  1.0000  0.6638  0.9076  0.9188  0.8655  0.8655
+k            0.9826  0.2449  0.6638  1.0000  0.6299  0.8324  0.9393  0.9393
+i            0.7406  0.9057  0.9076  0.6299  1.0000  0.9534  0.8511  0.8511
+y            0.9089  0.7355  0.9188  0.8324  0.9534  1.0000  0.9699  0.9699
+w            0.9831  0.5482  0.8655  0.9393  0.8511  0.9699  1.0000  1.0000
+y_n          0.9831  0.5482  0.8655  0.9393  0.8511  0.9699  1.0000  1.0000
+
+
+
+APPROXIMATED COEFFICIENTS OF AUTOCORRELATION
+Order          1       2       3       4       5
+c         0.9968  0.9917  0.9847  0.9760  0.9660
+n         0.7994  0.7254  0.6567  0.5929  0.5338
+z         0.9500  0.9025  0.8574  0.8145  0.7738
+k         0.9987  0.9952  0.9897  0.9824  0.9735
+i         0.8954  0.8428  0.7933  0.7466  0.7025
+y         0.9598  0.9298  0.9004  0.8717  0.8437
+w         0.9908  0.9771  0.9624  0.9469  0.9306
+y_n       0.9908  0.9771  0.9624  0.9469  0.9306
+Total computing time : 0h00m02s
