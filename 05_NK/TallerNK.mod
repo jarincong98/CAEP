@@ -60,6 +60,7 @@ close all;
                 rho     % Persistencia varios procesos (r_n, Taylor)
                 mu      %
                 rho_i  % Persistencia Regla de Taylor
+                h       % Hábitos de consumo
     ;
 
 % Calibración
@@ -68,7 +69,7 @@ close all;
     varphi  = 1;
     alpha   = 1/3;
     epsilon = 6; % 6;
-    theta   = 0.01;  % 2/3;
+    theta   = 2/3;  % 2/3;
     phi_pi  = 1.5;
     eta     = 4;
     phi_y   = 0.5/4;
@@ -77,7 +78,7 @@ close all;
     mu      = log(epsilon/(epsilon-1));
     rho     = -log(beta);
     rho_i   = 0.5;
-
+    h = 0.8;
 %------------------------------------------------------------------------%
 % 3. Modelo
 %------------------------------------------------------------------------%     
@@ -92,17 +93,19 @@ model(linear);
 
     % Modelo Económico
         % 1. Curva de Phillips NK
-        pi = beta*pi(+1) + kappa*y_hat;
+        % pi = beta*pi(+1) + kappa*y_hat;
+        pi = 0.5*pi(-1) + 0.5*beta*pi(+1) + kappa*y_hat;
 
         % 2. Curva IS Dinámica
-        y_hat = y_hat(+1) - (1/sigma)*(r-r_n);
+        % y_hat = y_hat(+1) - (1/sigma)*(r-r_n);
+        y_hat=-(1-h)/((1+h)*sigma)*(i-pi(+1)-r_n)+1/(1+h)*y_hat(+1)+h/(1+h)*y_hat(-1);
 
         % 3. Tasa de interés neutral
         r_n = rho + sigma*(a - a(-1));
 
         % 4. Regla de Taylor de Política Monetaria
-        i = rho + phi_pi*pi + phi_y*y_hat + nu;
-        % i = rho_i*i(-1) + (1-rho_i)*(phi_pi*pi + phi_y*y_hat) + nu;
+        % i = rho + phi_pi*pi + phi_y*y_hat + nu;
+        i = rho_i*i(-1) + (1-rho_i)*(phi_pi*pi + phi_y*y_hat) + nu;
 
         % 5. Proceso Choque de PM
         nu = rho_nu*nu(-1) + eps_nu;

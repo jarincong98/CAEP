@@ -8,7 +8,7 @@ dynare TallerNK.mod nograph nolog noclearall;
 %2. Guardar Info de NK básico
 NK_0 = oo_.irfs;
 
-%3. Correr NK con suavizamiento de Regla de Taylor
+%% 3. Correr NK con suavizamiento de Regla de Taylor
     % Meterse en el código y cambiar el parámetro
 dynare TallerNK.mod nograph nolog noclearall;
 

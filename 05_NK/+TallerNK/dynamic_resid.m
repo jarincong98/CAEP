@@ -23,19 +23,19 @@ if T_flag
     T = TallerNK.dynamic_resid_tt(T, y, x, params, steady_state, it_);
 end
 residual = zeros(14, 1);
-    residual(1) = (y(6)) - (params(1)*y(18)+y(3)*T(1));
-    residual(2) = (y(3)) - (y(17)-1/params(2)*(y(9)-y(10)));
-    residual(3) = (y(10)) - (params(12)+params(2)*(y(11)-y(1)));
-    residual(4) = (y(8)) - (params(12)+y(6)*params(8)+y(3)*params(9)+y(12));
-    residual(5) = (y(12)) - (params(10)*y(2)+x(it_, 2));
-    residual(6) = (y(11)) - (y(1)*params(11)+x(it_, 1));
-    residual(7) = (y(3)) - (y(4)-y(5));
-    residual(8) = (y(5)) - ((-((1-params(4))*(params(13)-log(1-params(4)))))/(params(4)+params(3)+(1-params(4))*params(2))+(1+params(3))/(params(4)+params(3)+(1-params(4))*params(2))*y(1));
-    residual(9) = (y(4)) - (y(1)+(1-params(4))*y(7));
-    residual(10) = (y(9)) - (y(8)-y(18));
-    residual(11) = (y(13)) - (y(8)*4);
-    residual(12) = (y(15)) - (y(9)*4);
-    residual(13) = (y(16)) - (y(10)*4);
-    residual(14) = (y(14)) - (y(6)*4);
+    residual(1) = (y(9)) - (0.5*y(2)+params(1)*0.5*y(21)+y(6)*T(2));
+    residual(2) = (y(6)) - (T(1)*(y(11)-y(21)-y(13))+1/(1+params(15))*y(20)+params(15)/(1+params(15))*y(1));
+    residual(3) = (y(13)) - (params(12)+params(2)*(y(14)-y(4)));
+    residual(4) = (y(11)) - (params(14)*y(3)+(1-params(14))*(y(9)*params(8)+y(6)*params(9))+y(15));
+    residual(5) = (y(15)) - (params(10)*y(5)+x(it_, 2));
+    residual(6) = (y(14)) - (y(4)*params(11)+x(it_, 1));
+    residual(7) = (y(6)) - (y(7)-y(8));
+    residual(8) = (y(8)) - ((-((1-params(4))*(params(13)-log(1-params(4)))))/(params(4)+params(3)+(1-params(4))*params(2))+(1+params(3))/(params(4)+params(3)+(1-params(4))*params(2))*y(4));
+    residual(9) = (y(7)) - (y(4)+(1-params(4))*y(10));
+    residual(10) = (y(12)) - (y(11)-y(21));
+    residual(11) = (y(16)) - (y(11)*4);
+    residual(12) = (y(18)) - (y(12)*4);
+    residual(13) = (y(19)) - (y(13)*4);
+    residual(14) = (y(17)) - (y(9)*4);
 
 end

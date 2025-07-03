@@ -1,14 +1,14 @@
 function [residual, T_order, T] = static_resid(y, x, params, T_order, T)
 if nargin < 5
     T_order = -1;
-    T = NaN(1, 1);
+    T = NaN(2, 1);
 end
 [T_order, T] = TallerNK.sparse.static_resid_tt(y, x, params, T_order, T);
 residual = NaN(14, 1);
-    residual(1) = (y(4)) - (params(1)*y(4)+T(1)*y(1));
-    residual(2) = (y(1)) - (y(1)-1/params(2)*(y(7)-y(8)));
+    residual(1) = (y(4)) - (y(4)*0.5+y(4)*params(1)*0.5+T(1)*y(1));
+    residual(2) = (y(1)) - (T(2)*(y(6)-y(4)-y(8))+y(1)*1/(1+params(15))+y(1)*params(15)/(1+params(15)));
     residual(3) = (y(8)) - (params(12));
-    residual(4) = (y(6)) - (params(12)+y(4)*params(8)+y(1)*params(9)+y(10));
+    residual(4) = (y(6)) - (y(6)*params(14)+(1-params(14))*(y(4)*params(8)+y(1)*params(9))+y(10));
     residual(5) = (y(10)) - (y(10)*params(10)+x(2));
     residual(6) = (y(9)) - (y(9)*params(11)+x(1));
     residual(7) = (y(1)) - (y(2)-y(3));

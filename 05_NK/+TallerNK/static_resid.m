@@ -19,10 +19,10 @@ if T_flag
     T = TallerNK.static_resid_tt(T, y, x, params);
 end
 residual = zeros(14, 1);
-    residual(1) = (y(4)) - (params(1)*y(4)+T(1)*y(1));
-    residual(2) = (y(1)) - (y(1)-1/params(2)*(y(7)-y(8)));
+    residual(1) = (y(4)) - (y(4)*0.5+y(4)*params(1)*0.5+T(1)*y(1));
+    residual(2) = (y(1)) - (T(2)*(y(6)-y(4)-y(8))+y(1)*1/(1+params(15))+y(1)*params(15)/(1+params(15)));
     residual(3) = (y(8)) - (params(12));
-    residual(4) = (y(6)) - (params(12)+y(4)*params(8)+y(1)*params(9)+y(10));
+    residual(4) = (y(6)) - (y(6)*params(14)+(1-params(14))*(y(4)*params(8)+y(1)*params(9))+y(10));
     residual(5) = (y(10)) - (y(10)*params(10)+x(2));
     residual(6) = (y(9)) - (y(9)*params(11)+x(1));
     residual(7) = (y(1)) - (y(2)-y(3));

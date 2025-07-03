@@ -4,7 +4,7 @@ if T_order >= 1
 end
 [T_order, T] = TallerNK.sparse.dynamic_resid_tt(y, x, params, steady_state, T_order, T);
 T_order = 1;
-if size(T, 1) < 1
-    T = [T; NaN(1 - size(T, 1), 1)];
+if size(T, 1) < 2
+    T = [T; NaN(2 - size(T, 1), 1)];
 end
 end
