@@ -68,7 +68,7 @@ close all;
     varphi  = 1;
     alpha   = 1/3;
     epsilon = 6; % 6;
-    theta   = 2/3;  % 0.01;
+    theta   = 0.01;  % 2/3;
     phi_pi  = 1.5;
     eta     = 4;
     phi_y   = 0.5/4;
@@ -101,8 +101,8 @@ model(linear);
         r_n = rho + sigma*(a - a(-1));
 
         % 4. Regla de Taylor de Política Monetaria
-        % i = rho + phi_pi*pi + phi_y*y_hat + nu;
-        i = rho_i*i(-1) + (1-rho_i)*(phi_pi*pi + phi_y*y_hat) + nu;
+        i = rho + phi_pi*pi + phi_y*y_hat + nu;
+        % i = rho_i*i(-1) + (1-rho_i)*(phi_pi*pi + phi_y*y_hat) + nu;
 
         % 5. Proceso Choque de PM
         nu = rho_nu*nu(-1) + eps_nu;
@@ -156,7 +156,8 @@ end;
 % 5. Simulación del Modelo
 %------------------------------------------------------------------------%    
 
-stoch_simul(irf = 20, order = 1,relative_irf) i_ann r_ann r_n_ann pi_ann y_hat; 
+stoch_simul(irf = 20, order = 1,relative_irf);
+% i_ann r_ann r_n_ann pi_ann y_hat; 
 
 
 

@@ -3,14 +3,14 @@
 %% Ejercicio 4
 
 %1. Correr NK básico y guardar resultados
-dynare Gali_2008_chapter_3.mod nograph nolog noclearall;
+dynare TallerNK.mod nograph nolog noclearall;
 
 %2. Guardar Info de NK básico
 NK_0 = oo_.irfs;
 
 %3. Correr NK con suavizamiento de Regla de Taylor
     % Meterse en el código y cambiar el parámetro
-dynare Gali_2008_chapter_3.mod nograph nolog noclearall;
+dynare TallerNK.mod nograph nolog noclearall;
 
 % 4. Guardar Info de NK alterado
 NK_1 = oo_.irfs;
@@ -25,14 +25,14 @@ load Ej4_NK;
 %% Ejercicio 5
 
 %1. Correr NK básico y guardar resultados
-dynare Gali_2008_chapter_3.mod nograph nolog noclearall;
+dynare TallerNK.mod nograph nolog noclearall;
 
 %2. Guardar Info de NK básico
 NK_0 = oo_.irfs;
 
 %3. Correr NK con Indexación de Inflación
     % Meterse en el código y cambiar el parámetro
-dynare Gali_2008_chapter_3.mod nograph nolog noclearall;
+dynare TallerNK.mod nograph nolog noclearall;
 
 % 4. Guardar Info de NK alterado
 NK_1 = oo_.irfs;
@@ -47,14 +47,14 @@ load Ej5_NK;
 %% Ejercicio 6
 
 %1. Correr NK básico y guardar resultados
-dynare Gali_2008_chapter_3.mod nograph nolog noclearall;
+dynare TallerNK.mod nograph nolog noclearall;
 
 %2. Guardar Info de NK básico
 NK_0 = oo_.irfs;
 
 %3. Correr NK con Indexación de Inflación
     % Meterse en el código y cambiar el parámetro
-dynare Gali_2008_chapter_3.mod nograph nolog noclearall;
+dynare TallerNK.mod nograph nolog noclearall;
 
 % 4. Guardar Info de NK alterado
 NK_1 = oo_.irfs;
@@ -69,14 +69,14 @@ load Ej6_NK;
 %% Ejercicio 7
 
 %1. Correr NK básico y guardar resultados
-dynare Gali_2008_chapter_3.mod nograph nolog noclearall;
+dynare TallerNK.mod nograph nolog noclearall;
 
 %2. Guardar Info de NK básico
 NK_0 = oo_.irfs;
 
 %3. Correr NK con TODO
     % Meterse en el código y cambiar el parámetro
-dynare Gali_2008_chapter_3.mod nograph nolog noclearall;
+dynare TallerNK.mod nograph nolog noclearall;
 
 % 4. Guardar Info de NK alterado
 NK_1 = oo_.irfs;
@@ -92,9 +92,9 @@ load Ej7_NK;
 figure(1)
     % Brecha del producto
     subplot(3,2,1)
-    plot(NK_0.y_gap_eps_nu,'k','LineWidth',2)
+    plot(NK_0.y_hat_eps_nu,'k','LineWidth',2)
     hold on
-    plot(NK_1.y_gap_eps_nu,'r--','LineWidth',2)
+    plot(NK_1.y_hat_eps_nu,'r--','LineWidth',2)
     yline(0,'b:','LineWidth',2)
     hold off
     grid on
@@ -128,9 +128,9 @@ figure(1)
     title('$i$ Ann','Interpreter','latex','FontSize',14)
     % Tasa real anualizada
     subplot(3,2,4)
-    plot(NK_0.r_real_ann_eps_nu,'k','LineWidth',2)
+    plot(NK_0.r_ann_eps_nu,'k','LineWidth',2)
     hold on
-    plot(NK_1.r_real_ann_eps_nu,'r--','LineWidth',2)
+    plot(NK_1.r_ann_eps_nu,'r--','LineWidth',2)
     yline(0,'b:','LineWidth',2)
     hold off
     grid on
