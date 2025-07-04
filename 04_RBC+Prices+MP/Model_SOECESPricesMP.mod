@@ -1,6 +1,11 @@
-%%%  SOE + CES Different technologies for C and I
 %----------------------------------------------------------------
-% define variables 
+%                       CAEP 2025
+%       SOE + CES Different technologies for C and I
+%----------------------------------------------------------------
+close all;
+
+%----------------------------------------------------------------
+% 1. Define variables 
 %----------------------------------------------------------------
 
 var  
@@ -48,21 +53,61 @@ var
     i_nom       $i^{nom}$   (long_name = 'Nominal Interest Rate') 
 ;
 
-varexo eps_A eps_P_star eps_Pim_star eps_y_star eps_C eps_I eps_inom
-
+%----------------------------------------------------------------
+% 2. Define Exogenous Variables 
+%----------------------------------------------------------------
+varexo 
+    eps_A           $\epsilon^A$                (long_name = 'TFP Shock')
+    eps_P_star      $\epsilon^{P^{\star}}$      (long_name = 'Foreign CPI Shock')
+    eps_Pim_star    $\epsilon^{P^{im,\star}}$   (long_name = 'Foregin imports CPI Shock')
+    eps_y_star      $\epsilon^{y^{\star}}$      (long_name = 'Foregin Demand Shock')
+    eps_C           $\epsilon^C$                (long_name = 'Consumption Shock')
+    eps_I           $\epsilon^I$                (long_name = 'Investment Shock')
+    eps_inom        $\epsilon^{i^{nom}}$        (long_name = 'Nominal Rate Shock')
 ;
 
 %----------------------------------------------------------------
-% define parameters
+% 3. Define Parameters
 %----------------------------------------------------------------
 
-parameters sigma delta beta psi_h eta phi_K alpha theta_c theta_i omega_c omega_i theta_ex B_star_ss 
-    y_star_ss A_ss P_star_ss rho_C rho_I phi_q phi_im theta_im Pim_star_ss theta_d Z_C_ss Z_I_ss 
-    rho_A rho_Pim_star rho_y_star phi_b rho_P_star R_star_ss
-
-    i_nom_ss GDP_ss P_c_ss rho_inom phi_y phi_P
-                    
-     
+parameters 
+    sigma       $\sigma$            (long_name = 'EIS')
+    delta       $\delta$            (long_name = 'Capital Depreciation')
+    beta        $\beta$             (long_name = 'Discount Factor')
+    psi_h       $\psi^h$            (long_name = 'Labor Disutility')
+    eta         $\eta$              (long_name = 'Inv. Frisch')
+    phi_K       $\phi^k$            (long_name = 'Capital Adj. Cost')
+    alpha       $\alpha$            (long_name = 'Elasticity of capital in output')
+    theta_c     $\theta^c$          (long_name = 'Elasticity of Substitution Consumption')
+    theta_i     $\theta^i$          (long_name = 'Elasticity of Substitution Investment')
+    omega_c     $\omega^c$          (long_name = 'Home bias consumption')
+    omega_i     $\omega^i$          (long_name = 'Home bias Investment')
+    theta_ex    $\theta^{ex}$       (long_name = 'Elasticity of Substitution Exports')
+    B_star_ss   $B^{\star}_{ss}$    (long_name = 'Foreign Bonds SS')
+    y_star_ss   $y^{\star}_{ss}$    (long_name = 'Foreign Demand SS')
+    A_ss        $A_ss$              (long_name = 'TFP SS')
+    P_star_ss   $P^{\star}_{ss}$    (long_name = 'Foreign CPI SS')
+    rho_C       $\rho_c$            (long_name = 'Persistence Consumption Shock')
+    rho_I       $\rho_i$            (long_name = 'Persistence Investment Shock')
+    phi_q       $\phi^q$            (long_name = 'Rotemberg Domestic Price Adjustment Cost')
+    phi_im      $\phi^{im}$         (long_name = 'Rotemberg Imports Price Adjustment Cost')
+    theta_im    $\theta^{im}$       (long_name = 'Elasticity of substitution Imports')
+    Pim_star_ss $P^{im\star}_{ss}$  (long_name = 'Price of imports in FC SS')
+    theta_d     $\theta^d$          (long_name = 'Elasticity of Substitution Domestic Goods')
+    Z_C_ss      $Z^c_{ss}$          (long_name = 'Consumption shock SS')
+    Z_I_ss      $Z^i_{ss}$          (long_name = 'Investment Shock SS')
+    rho_A       $\rho_A$            (long_name = 'Persistence TFP')
+    rho_Pim_star $\rho_{P^{im\star}}$ (long_name = 'Persistence Imports Price in FC')    
+    rho_y_star  $\rho_{y^{\star}}$  (long_name = 'Persistence Foreign Demand')
+    phi_b       $\phi^b$            (long_name = 'SGU Parameter')
+    rho_P_star  $\rho_{P^{\star}}$  (long_name = 'Persistence Foreign CPI')
+    R_star_ss   $R^{\star}_{ss}$    (long_name = 'Foreign interest rate SS')
+    i_nom_ss    $i^{nom}_{ss}$      (long_name = 'Nominal rate SS')
+    GDP_ss      $DGP_{ss}$          (long_name = 'GDP SS')
+    P_c_ss      $P^c_{ss}$          (long_name = 'Consumption Price SS')
+    rho_inom    $\rho_{i^{nom}}$    (long_name = 'Persistence Nominal Rate')
+    phi_y       $\phi^y$            (long_name = 'Taylor Rule GDP Gap')
+    phi_P       $\phi^p$            (long_name = 'Taylor Rule Inflation Gap')                       
 ;
 
 
