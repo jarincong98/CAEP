@@ -391,4 +391,6 @@ P_c                 72.55              0.00              0.00              0.00 
 i_nom               66.05              0.00              0.00              0.00              0.00              0.00             34.05            100.11
 Note: numbers do not add up to 100 due to i) non-zero correlation of simulated shocks in small samples and ii) nonlinearity
 
-Total computing time : 0h00m05s
+[Warning: Exported image displays axes toolbar. To remove axes toolbar from image, export again.] 
+Total computing time : 0h00m06s
+Note: warning(s) encountered in MATLAB/Octave code
