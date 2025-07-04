@@ -1381,14 +1381,44 @@ steady;
 M_.exo_det_length = 0;
 M_.Sigma_e(5, 5) = 0.0001;
 M_.Sigma_e(1, 1) = (0.01)^2;
+if isempty(estim_params_)
+    estim_params_.var_exo = zeros(0, 10);
+    estim_params_.var_endo = zeros(0, 10);
+    estim_params_.corrx = zeros(0, 11);
+    estim_params_.corrn = zeros(0, 11);
+    estim_params_.param_vals = zeros(0, 10);
+end
+if ~isempty(find(estim_params_.param_vals(:,1)==26))
+    error('Parameter rho_A has been specified twice in two concatenated ''estimated_params'' blocks. Depending on your intention, you may want to use the ''overwrite'' option or an ''estimated_params_remove'' block.')
+end
+estim_params_.param_vals = [estim_params_.param_vals; 26, 0.8, 0, 1, 0, NaN, NaN, NaN, NaN, NaN ];
+if ~isempty(find(estim_params_.param_vals(:,1)==17))
+    error('Parameter rho_C has been specified twice in two concatenated ''estimated_params'' blocks. Depending on your intention, you may want to use the ''overwrite'' option or an ''estimated_params_remove'' block.')
+end
+estim_params_.param_vals = [estim_params_.param_vals; 17, 0.8, 0, 1, 0, NaN, NaN, NaN, NaN, NaN ];
+if ~isempty(find(estim_params_.var_exo(:,1)==1))
+    error('The standard deviation for eps_A has been specified twice in two concatenated ''estimated_params'' blocks. Depending on your intention, you may want to use the ''overwrite'' option or an ''estimated_params_remove'' block.')
+end
+estim_params_.var_exo = [estim_params_.var_exo; 1, 0.01, 0.00001, 10, 0, NaN, NaN, NaN, NaN, NaN ];
+if ~isempty(find(estim_params_.var_exo(:,1)==5))
+    error('The standard deviation for eps_C has been specified twice in two concatenated ''estimated_params'' blocks. Depending on your intention, you may want to use the ''overwrite'' option or an ''estimated_params_remove'' block.')
+end
+estim_params_.var_exo = [estim_params_.var_exo; 5, 0.01, 0.00001, 10, 0, NaN, NaN, NaN, NaN, NaN ];
 options_.datafile = 'Datos/DataCOL.xlsx';
+options_.mode_check.status = true;
+options_.mode_compute = 5;
+options_.nobs = 170;
+options_.smoother = true;
+options_.order = 1;
+var_list_ = {};
+oo_recursive_=dynare_estimation(var_list_);
 options_.no_graph.shock_decomposition = true;
 options_.nobs = 171;
-options_.parameter_set = 'calibration';
+options_.parameter_set = 'mle_mode';
 var_list_ = {};
 oo_ = shock_decomposition(M_,oo_,options_,var_list_,bayestopt_,estim_params_);
 options_ = set_default_plot_shock_decomposition_options(options_);
-var_list_ = {'h'};
+var_list_ = {'Y_obs';'C_obs'};
 oo_ = plot_shock_decomposition(M_, oo_, options_, var_list_);
 options_.irf = 40;
 options_.nograph = true;
