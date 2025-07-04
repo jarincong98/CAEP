@@ -23,8 +23,8 @@ assert(length(T) >= 117);
 T = Model_SOECESPricesMP.dynamic_g1_tt(T, y, x, params, steady_state, it_);
 
 T(103) = getPowerDeriv(y(21)*y(15)/params(4),1/params(5),2);
-T(104) = getPowerDeriv(y(56)/y(14),(-params(1)),2);
-T(105) = params(3)*(T(41)*(-((-y(56))*(y(14)+y(14))))/(y(14)*y(14)*y(14)*y(14))+T(40)*T(40)*T(104));
+T(104) = getPowerDeriv(y(58)/y(14),(-params(1)),2);
+T(105) = params(3)*(T(41)*(-((-y(58))*(y(14)+y(14))))/(y(14)*y(14)*y(14)*y(14))+T(40)*T(40)*T(104));
 T(106) = params(3)*(T(41)*(-1)/(y(14)*y(14))+T(40)*1/y(14)*T(104));
 T(107) = params(3)*1/y(14)*1/y(14)*T(104);
 T(108) = (-1)/(y(16)*y(16));

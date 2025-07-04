@@ -9,6 +9,9 @@ close all;
 %----------------------------------------------------------------
 
 var  
+%----------------------------------------------------------------
+%  Model Variables
+%---------------------------------------------------------------
     K           $K$         (long_name = 'Aggregate Capital')
     C           $C$         (long_name = 'Aggregate Consumption')
     W           $W$         (long_name = 'Nominal Wage')
@@ -51,6 +54,14 @@ var
     Z_I         $Z^i$       (long_name = 'Investment Combination Efficiency')
     y_star      $y^{\star}$ (long_name = 'Foreign Demand') 
     i_nom       $i^{nom}$   (long_name = 'Nominal Interest Rate') 
+
+%----------------------------------------------------------------
+%  Observables
+%---------------------------------------------------------------    
+
+    Y_obs     $Y^{obs}$ (long_name = 'Observable GDP')
+    C_obs     $C^{obs}$ (long_name = 'Observable Consumption')
+    
 ;
 
 %----------------------------------------------------------------
@@ -301,7 +312,16 @@ A = A(-1)^rho_A*A_ss^(1-rho_A)*(1+eps_A);
 Z_C = Z_C(-1)^rho_C*(1+eps_C);
 Z_I = Z_I(-1)^rho_I*(1+eps_I);
 
+%----------------------------------------------------------------
+%  Measurement Equations
+%---------------------------------------------------------------
 
+[name = 'Measurement Eq: GDP Obs']
+    Y_obs = GDP;
+
+[name = 'Measurement Eq: Consumption Obs']
+    C_obs = C;
+    
 end;
 
 %----------------------------------------------------------------
@@ -354,25 +374,58 @@ y_star = SSvar(41);
 i_nom = SSvar(42);
 
 end;
+
+%----------------------------------------------------------------
+%  Model Diagnostics and Steady State
+%---------------------------------------------------------------
+
 model_diagnostics;
 resid(non_zero);
 check;
 steady;
 
-%% Shocks 
+%----------------------------------------------------------------
+%  Shocks Standar Deviations
+%---------------------------------------------------------------
 shocks;
 
-var eps_A = 0.01^2;
-% var eps_Pim_star = 0.01^2;
-% var eps_y_star = 0.01^2;
-% var eps_P_star = 0.01^2;
-% var eps_C = 0.01^2;
-% var eps_I = 0.01^2;
-var eps_inom = 0.01^2;
+    var eps_A ; stderr 0.01 ;
+    % var eps_Pim_star = 0.01^2;
+    % var eps_y_star = 0.01^2;
+    % var eps_P_star = 0.01^2;
+    var eps_C = 0.01^2;
+    % var eps_I = 0.01^2;
+    % var eps_inom = 0.01^2;
 
 end;
 
 %----------------------------------------------------------------
+%  Observable Variables
+%---------------------------------------------------------------
+
+varobs
+    Y_obs
+    C_obs
+;
+
+%----------------------------------------------------------------
+%  Shock Decomposition
+%---------------------------------------------------------------
+
+shock_decomposition(parameter_set   =   calibration
+                ,   datafile        =   'Datos/DataCOL.xlsx'
+                ,   nobs            =   171
+                ,   nograph
+                    );
+
+plot_shock_decomposition
+    Y_obs
+    C_obs
+    h
+;             
+
+
+%----------------------------------------------------------------
 %  Simul-IRF
 %---------------------------------------------------------------
-stoch_simul(periods = 100000, irf=40) GDP C I EX IM NX s P_c i_nom;
+stoch_simul(periods = 100000, irf=40, nograph) GDP C I EX IM NX s P_c i_nom;

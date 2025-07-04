@@ -18,7 +18,7 @@ function g1 = static_g1(T, y, x, params, T_flag)
 if T_flag
     T = Model_SOECESPricesMP.static_g1_tt(T, y, x, params);
 end
-g1 = zeros(42, 42);
+g1 = zeros(44, 44);
 g1(1,8)=(-(params(37)*1/params(34)));
 g1(1,24)=(-(params(36)*1/params(33)));
 g1(1,42)=1-params(35);
@@ -167,5 +167,9 @@ g1(39,41)=1-(1+x(4))*T(19)*getPowerDeriv(y(41),params(28),1);
 g1(40,37)=1-(1+x(1))*T(20)*getPowerDeriv(y(37),params(26),1);
 g1(41,39)=1-(1+x(5))*getPowerDeriv(y(39),params(17),1);
 g1(42,40)=1-(1+x(6))*getPowerDeriv(y(40),params(18),1);
+g1(43,24)=(-1);
+g1(43,43)=1;
+g1(44,2)=(-1);
+g1(44,44)=1;
 
 end
