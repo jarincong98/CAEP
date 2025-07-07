@@ -61,6 +61,7 @@ var
 
     Y_obs     $Y^{obs}$ (long_name = 'Observable GDP')
     C_obs     $C^{obs}$ (long_name = 'Observable Consumption')
+    I_obs     $I^{obs}$ (long_name = 'Observable Investment')
     
 ;
 
@@ -321,6 +322,9 @@ Z_I = Z_I(-1)^rho_I*(1+eps_I);
 
 [name = 'Measurement Eq: Consumption Obs']
     C_obs = C;
+
+[name = 'Measurement Eq: Investment Obs']
+    I_obs = I;
     
 end;
 
@@ -421,8 +425,26 @@ varobs
 % , INITIAL_VALUE [, LOWER_BOUND, UPPER_BOUND ];
 
 estimated_params;
+    % --- Persistences --- %
+    rho_A   ,   0.8     ,   0   ,   1   ;
+    rho_C   ,   0.8     ,   0   ,   1   ;
+
+    % --- Std. Dev. --- %
+    stderr  eps_A       ,   0.01    ,   0.00001 ,   10      ;
+    stderr  eps_C       ,   0.01    ,   0.00001 ,   10      ;
     
 end;
+
+% ----------------------------------- %
+%   Estimation
+% ----------------------------------- %
+
+estimation( datafile        =   'Datos/DataCOL.xlsx'
+        ,   nobs            =   170 
+        ,   mode_compute    =   5
+        ,   mode_check
+        ,   smoother
+            );
 
 
 %----------------------------------------------------------------
@@ -430,7 +452,7 @@ end;
 %---------------------------------------------------------------
 
 shock_decomposition(parameter_set   =   mle_mode
-                ,   datafile        =   'Datos/DataCOL.xlsx'
+                % ,   datafile        =   'Datos/DataCOL.xlsx'
                 ,   nobs            =   171
                 ,   nograph
                     );
@@ -438,7 +460,6 @@ shock_decomposition(parameter_set   =   mle_mode
 plot_shock_decomposition
     Y_obs
     C_obs
-    h
 ;             
 
 

@@ -4,7 +4,7 @@ if nargin < 5
     T = NaN(20, 1);
 end
 [T_order, T] = Model_SOECESPricesMP.sparse.static_resid_tt(y, x, params, T_order, T);
-residual = NaN(44, 1);
+residual = NaN(45, 1);
     residual(1) = (y(42)) - (y(42)*params(35)+(1-params(35))*params(32)+params(37)*(y(8)/params(34)-1)+params(36)*(y(24)/params(33)-1)+x(7));
     residual(2) = (y(8)*y(9)) - (y(8)*y(9)*params(3)*(1+y(42)));
     residual(3) = (y(34)) - (y(6)*y(38)/y(8));
@@ -49,4 +49,5 @@ residual(28) = y(29);
     residual(42) = (y(40)) - (y(40)^params(18)*(1+x(6)));
     residual(43) = (y(43)) - (y(24));
     residual(44) = (y(44)) - (y(2));
+    residual(45) = (y(45)) - (y(7));
 end

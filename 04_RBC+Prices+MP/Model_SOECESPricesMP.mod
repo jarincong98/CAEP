@@ -61,6 +61,7 @@ var
 
     Y_obs     $Y^{obs}$ (long_name = 'Observable GDP')
     C_obs     $C^{obs}$ (long_name = 'Observable Consumption')
+    I_obs     $I^{obs}$ (long_name = 'Observable Investment')
     
 ;
 
@@ -321,6 +322,9 @@ Z_I = Z_I(-1)^rho_I*(1+eps_I);
 
 [name = 'Measurement Eq: Consumption Obs']
     C_obs = C;
+
+[name = 'Measurement Eq: Investment Obs']
+    I_obs = I;
     
 end;
 
@@ -394,7 +398,7 @@ shocks;
     % var eps_y_star = 0.01^2;
     % var eps_P_star = 0.01^2;
     var eps_C = 0.01^2;
-    % var eps_I = 0.01^2;
+    var eps_I = 0.01^2;
     % var eps_inom = 0.01^2;
 
 end;
@@ -406,6 +410,7 @@ end;
 varobs
     Y_obs
     C_obs
+    I_obs
 ;
 
 %----------------------------------------------------------------
@@ -422,12 +427,17 @@ varobs
 
 estimated_params;
     % --- Persistences --- %
-    rho_A   ,   0.8     ,   0   ,   1   ;
+    % rho_A   ,   0.8     ,   0   ,   1   ;
     rho_C   ,   0.8     ,   0   ,   1   ;
+    rho_I   ,   0.8     ,   0   ,   1   ;
 
     % --- Std. Dev. --- %
     stderr  eps_A       ,   0.01    ,   0.00001 ,   10      ;
     stderr  eps_C       ,   0.01    ,   0.00001 ,   10      ;
+    stderr  eps_I       ,   0.01    ,   0.00001 ,   10      ;
+
+    % --- Marginal Costs --- %
+    phi_K   ,   0.01    ,   0       ,   20  ;
     
 end;
 
@@ -456,6 +466,7 @@ shock_decomposition(parameter_set   =   mle_mode
 plot_shock_decomposition
     Y_obs
     C_obs
+    I_obs
 ;             
 
 

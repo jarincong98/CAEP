@@ -18,6 +18,6 @@ function g2 = static_g2(T, y, x, params, T_flag)
 if T_flag
     T = Model_SOECESPricesMP.static_g2_tt(T, y, x, params);
 end
-g2 = sparse([],[],[],44,1936);
+g2 = sparse([],[],[],45,2025);
 
 end
