@@ -71,6 +71,9 @@ var
 
     % --- Nominal Policy Rate --- %
     i_nom_obs   $i^{nom,obs}$   (long_name = 'Observable nominal rate')
+
+    % --- Headline Inflation --- %
+    pi_obs      $\pi$   (long_name = 'Headline Inflation')
     
 ;
 
@@ -137,6 +140,7 @@ parameters
     B_pi_star_obs
     B_pi_im_star_obs
     B_i_nom_obs
+    B_pi_obs
 ;
 
 
@@ -193,6 +197,7 @@ phi_P  = params(37);
     B_pi_star_obs       = 0.0063    ;
     B_pi_im_star_obs    = -0.0052   ;
     B_i_nom_obs         = 0.0188    ;
+    B_pi_obs            = 0.0128    ;
 
 %----------------------------------------------------------------
 % enter model equations
@@ -365,6 +370,10 @@ Z_I = Z_I(-1)^rho_I*exp(eps_I);
 % --- Nominal Interest Rate --- %
 [name = 'Measurement Eq: Nominal Rate Obs']
     i_nom_obs = (1 + i_nom)^4 - 1 - B_i_nom_obs ;
+
+% --- Headline Inflation --- %
+[name = 'Measurement Eq: Headline Inflation Obs']
+    pi_obs = (P_d/P_d(-1) - 1) + B_pi_obs ;
     
 end;
 
@@ -434,16 +443,16 @@ steady;
 %  Shocks Standar Deviations
 %---------------------------------------------------------------
 shocks;
-    % --- Exogenous Shocks --- %
-    var eps_Pim_star = 0.01^2;
-    var eps_y_star = 0.01^2;
-    var eps_P_star = 0.01^2;
+    % --- Exogenous Shocks (Calibrated using MLE) --- %
+    var eps_Pim_star    ;   stderr  0.0091  ;
+    var eps_y_star      ;   stderr  0.0235  ;
+    var eps_P_star      ;   stderr  0.0052  ;
     
     % --- Structural Shocks --- %
-    var eps_A ; stderr 0.01 ;
-    var eps_C = 0.01^2;
-    var eps_I = 0.01^2;
-    var eps_inom = 0.01^2;
+    % var eps_A ; stderr 0.01 ;
+    % var eps_C = 0.01^2;
+    % var eps_I = 0.01^2;
+    % var eps_inom = 0.01^2;
 
 end;
 
@@ -457,11 +466,13 @@ varobs
     pi_star_obs
     pi_im_star_obs
 % --- National Accounts --- %
-    Y_obs
-    C_obs
-    I_obs
+    % Y_obs
+    % C_obs
+    % I_obs
 % --- Nominal Interest Rate --- %    
-    i_nom_obs
+    % i_nom_obs
+% --- Headline inflation --- %
+    % pi_obs
 ;
 
 %----------------------------------------------------------------
@@ -476,32 +487,39 @@ varobs
 % stderr VARIABLE_NAME | corr VARIABLE_NAME_1, VARIABLE_NAME_2 | PARAMETER_NAME
 % , INITIAL_VALUE [, LOWER_BOUND, UPPER_BOUND ];
 
-% estimated_params;
-%     % --- Persistences --- %
-%     % rho_A   ,   0.8     ,   0   ,   1   ;
-%     rho_C   ,   0.8     ,   0   ,   1   ;
-%     rho_I   ,   0.8     ,   0   ,   1   ;
-% 
-%     % --- Std. Dev. --- %
-%     stderr  eps_A       ,   0.01    ,   0.00001 ,   10      ;
-%     stderr  eps_C       ,   0.01    ,   0.00001 ,   10      ;
-%     stderr  eps_I       ,   0.01    ,   0.00001 ,   10      ;
-% 
-%     % --- Marginal Costs --- %
-%     phi_K   ,   0.01    ,   0       ,   20  ;
-% 
-% end;
+estimated_params;
+    % --- Persistences --- %
+    % rho_P_star  ,   0.5     ,   0   ,   1   ;
+    rho_Pim_star,   0.5     ,   0   ,   1   ;
+    rho_y_star  ,   0.5     ,   0   ,   1   ;
+    % rho_A   ,   0.8     ,   0   ,   1   ;
+    % rho_C   ,   0.8     ,   0   ,   1   ;
+    % rho_I   ,   0.8     ,   0   ,   1   ;
+
+    % --- Std. Dev. --- %
+    stderr  eps_P_star      ,   0.01    ,   0.00001 ,   10      ;
+    stderr  eps_Pim_star    ,   0.01    ,   0.00001 ,   10      ;
+    stderr  eps_y_star      ,   0.01    ,   0.00001 ,   10      ;
+    % stderr  eps_A       ,   0.01    ,   0.00001 ,   10      ;
+    % stderr  eps_C       ,   0.01    ,   0.00001 ,   10      ;
+    % stderr  eps_I       ,   0.01    ,   0.00001 ,   10      ;
+
+    % --- Marginal Costs --- %
+    % phi_K   ,   0.01    ,   0       ,   20  ;
+
+end;
 
 % ----------------------------------- %
 %   Estimation
 % ----------------------------------- %
 
-% estimation( datafile        =   'Datos/DataCOL.xlsx'
-%         ,   nobs            =   80
-%         ,   mode_compute    =   5
-%         ,   mode_check
-%         ,   smoother
-%             );
+estimation( datafile        =   'Datos/DataCOL.xlsx'
+        ,   nobs            =   80
+        ,   mode_compute    =   5
+        ,   mode_check
+        ,   smoother
+        ,   nograph
+            );
 
 
 %----------------------------------------------------------------
@@ -509,38 +527,39 @@ varobs
 %---------------------------------------------------------------
 options_.initial_date = dates('2000Q1');
 
-shock_decomposition(parameter_set   =   calibration
+shock_decomposition(parameter_set   =   mle_mode
                 ,   datafile        =   'Datos/DataCOL.xlsx'
                 ,   first_obs       =   1
                 ,   nobs            =   80
                 ,   nograph
                     );
 
-plot_shock_decomposition
-    % y_star_obs
-    % pi_star_obs
-    % pi_im_star_obs
-    Y_obs
-    C_obs
-    I_obs
-    i_nom_obs
-;             
+% plot_shock_decomposition
+%     % y_star_obs
+%     pi_star_obs
+%     % pi_im_star_obs
+%     % Y_obs
+%     % C_obs
+%     % I_obs
+%     % i_nom_obs
+%     % pi_obs
+% ;             
 
 
 %----------------------------------------------------------------
 %  Simul-IRF
 %---------------------------------------------------------------
-stoch_simul(periods = 100000
-        ,   irf=40
-        ,   nograph
-            )
-            GDP
-            C
-            I
-            EX
-            IM
-            NX
-            s
-            P_c
-            i_nom
-            ;
+% stoch_simul(periods = 100000
+%         ,   irf=40
+%         ,   nograph
+%             )
+%             GDP
+%             C
+%             I
+%             EX
+%             IM
+%             NX
+%             s
+%             P_c
+%             i_nom
+%             ;
