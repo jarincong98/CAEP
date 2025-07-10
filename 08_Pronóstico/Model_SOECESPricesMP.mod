@@ -60,7 +60,8 @@ var
 %---------------------------------------------------------------    
 
     % --- Foreign Variables --- %
-    y_star_obs  $y^{\star,obs}$ (long_name = 'Observable Foreign Demand') 
+    y_star_obs  $y^{\star,obs}$     (long_name = 'Observable Foreign Demand') 
+    pi_star_obs $\pi^{\star,obs}$   (long_name = 'Observable Foreign Inflation')
 
     % --- National Accounts --- %
     Y_obs     $Y^{obs}$ (long_name = 'Observable GDP')
@@ -123,7 +124,13 @@ parameters
     P_c_ss      $P^c_{ss}$          (long_name = 'Consumption Price SS')
     rho_inom    $\rho_{i^{nom}}$    (long_name = 'Persistence Nominal Rate')
     phi_y       $\phi^y$            (long_name = 'Taylor Rule GDP Gap')
-    phi_P       $\phi^p$            (long_name = 'Taylor Rule Inflation Gap')                       
+    phi_P       $\phi^p$            (long_name = 'Taylor Rule Inflation Gap') 
+
+    % --- Observables Discrepancy --- %
+    B_Y_obs
+    B_C_obs
+    B_I_obs
+    B_pi_star_obs
 ;
 
 
@@ -172,6 +179,12 @@ P_c_ss   = params(34);
 rho_inom   = params(35);
 phi_y   = params(36);
 phi_P  = params(37);
+
+    % --- Observables Discrepancy --- %
+    B_Y_obs         = 1.98925   ;
+    B_C_obs         = 1.74412   ;
+    B_I_obs         = 0.291099  ;
+    B_pi_star_obs   = 0.0063    ;
 
 %----------------------------------------------------------------
 % enter model equations
@@ -323,17 +336,20 @@ Z_I = Z_I(-1)^rho_I*exp(eps_I);
 
 % --- Foreign Variables --- %
 [name = 'Measurement Eq: Foreign Demand']
-    y_star_obs = y_star;
+    y_star_obs = y_star - 1;
+
+[name = 'Measurement Eq: Foreign Inflation']    
+    pi_star_obs = (P_star/P_star(-1) - 1) + B_pi_star_obs;
 
 % --- National Accounts --- %    
 [name = 'Measurement Eq: GDP Obs']
-    Y_obs = GDP;
+    Y_obs = GDP - B_Y_obs;
 
 [name = 'Measurement Eq: Consumption Obs']
-    C_obs = C;
+    C_obs = C - B_C_obs;
 
 [name = 'Measurement Eq: Investment Obs']
-    I_obs = I;
+    I_obs = I - B_I_obs;
     
 end;
 
@@ -397,6 +413,8 @@ resid(non_zero);
 check;
 steady;
 
+% return;
+
 %----------------------------------------------------------------
 %  Shocks Standar Deviations
 %---------------------------------------------------------------
@@ -405,7 +423,7 @@ shocks;
     % var eps_A ; stderr 0.01 ;
     % var eps_Pim_star = 0.01^2;
     var eps_y_star = 0.01^2;
-    % var eps_P_star = 0.01^2;
+    var eps_P_star = 0.01^2;
     % var eps_C = 0.01^2;
     % var eps_I = 0.01^2;
     % var eps_inom = 0.01^2;
@@ -419,6 +437,7 @@ end;
 varobs
 % --- Foreign Variables --- %
     y_star_obs
+    pi_star_obs
 % --- National Accounts --- %
     % Y_obs
     % C_obs
@@ -458,7 +477,7 @@ varobs
 % ----------------------------------- %
 
 % estimation( datafile        =   'Datos/DataCOL.xlsx'
-%         ,   nobs            =   170 
+%         ,   nobs            =   80
 %         ,   mode_compute    =   5
 %         ,   mode_check
 %         ,   smoother
@@ -468,15 +487,18 @@ varobs
 %----------------------------------------------------------------
 %  Shock Decomposition
 %---------------------------------------------------------------
+options_.initial_date = dates('2000Q1');
 
 shock_decomposition(parameter_set   =   calibration
                 ,   datafile        =   'Datos/DataCOL.xlsx'
-                % ,   nobs            =   50
+                ,   first_obs       =   1
+                ,   nobs            =   80
                 ,   nograph
                     );
 
 plot_shock_decomposition
     y_star_obs
+    pi_star_obs
     % Y_obs
     % C_obs
     % I_obs
@@ -486,4 +508,17 @@ plot_shock_decomposition
 %----------------------------------------------------------------
 %  Simul-IRF
 %---------------------------------------------------------------
-stoch_simul(periods = 100000, irf=40, nograph) GDP C I EX IM NX s P_c i_nom;
+stoch_simul(periods = 100000
+        ,   irf=40
+        ,   nograph
+            )
+            GDP
+            C
+            I
+            EX
+            IM
+            NX
+            s
+            P_c
+            i_nom
+            ;
