@@ -449,9 +449,9 @@ shocks;
     var eps_P_star      ;   stderr  0.0052  ;
     
     % --- Structural Shocks --- %
-    % var eps_A ; stderr 0.01 ;
-    % var eps_C = 0.01^2;
-    % var eps_I = 0.01^2;
+    var eps_A   ;   stderr  0.01    ;
+    var eps_C   ;   stderr  0.01    ;
+    var eps_I   ;   stderr  0.01    ;
     % var eps_inom = 0.01^2;
 
 end;
@@ -466,9 +466,9 @@ varobs
     pi_star_obs
     pi_im_star_obs
 % --- National Accounts --- %
-    % Y_obs
-    % C_obs
-    % I_obs
+    Y_obs
+    C_obs
+    I_obs
 % --- Nominal Interest Rate --- %    
     % i_nom_obs
 % --- Headline inflation --- %
@@ -490,22 +490,22 @@ varobs
 estimated_params;
     % --- Persistences --- %
     % rho_P_star  ,   0.5     ,   0   ,   1   ;
-    rho_Pim_star,   0.5     ,   0   ,   1   ;
-    rho_y_star  ,   0.5     ,   0   ,   1   ;
-    % rho_A   ,   0.8     ,   0   ,   1   ;
-    % rho_C   ,   0.8     ,   0   ,   1   ;
+    % rho_Pim_star,   0.5     ,   0   ,   1   ;
+    % rho_y_star  ,   0.5     ,   0   ,   1   ;
+    rho_A   ,   0.8     ,   0   ,   1   ;
+    rho_C   ,   0.8     ,   0   ,   1   ;
     % rho_I   ,   0.8     ,   0   ,   1   ;
 
     % --- Std. Dev. --- %
-    stderr  eps_P_star      ,   0.01    ,   0.00001 ,   10      ;
-    stderr  eps_Pim_star    ,   0.01    ,   0.00001 ,   10      ;
-    stderr  eps_y_star      ,   0.01    ,   0.00001 ,   10      ;
-    % stderr  eps_A       ,   0.01    ,   0.00001 ,   10      ;
-    % stderr  eps_C       ,   0.01    ,   0.00001 ,   10      ;
-    % stderr  eps_I       ,   0.01    ,   0.00001 ,   10      ;
+    % stderr  eps_P_star      ,   0.01    ,   0.00001 ,   10      ;
+    % stderr  eps_Pim_star    ,   0.01    ,   0.00001 ,   10      ;
+    % stderr  eps_y_star      ,   0.01    ,   0.00001 ,   10      ;
+    stderr  eps_A       ,   0.01    ,   0.00001 ,   10      ;
+    stderr  eps_C       ,   0.01    ,   0.00001 ,   10      ;
+    stderr  eps_I       ,   0.01    ,   0.00001 ,   10      ;
 
     % --- Marginal Costs --- %
-    % phi_K   ,   0.01    ,   0       ,   20  ;
+    phi_K   ,   0.01    ,   0       ,   20  ;
 
 end;
 
