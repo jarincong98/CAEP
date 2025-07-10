@@ -397,8 +397,8 @@ shocks;
     % var eps_Pim_star = 0.01^2;
     % var eps_y_star = 0.01^2;
     % var eps_P_star = 0.01^2;
-    var eps_C = 0.01^2;
-    var eps_I = 0.01^2;
+    % var eps_C = 0.01^2;
+    % var eps_I = 0.01^2;
     % var eps_inom = 0.01^2;
 
 end;
@@ -409,8 +409,8 @@ end;
 
 varobs
     Y_obs
-    C_obs
-    I_obs
+    % C_obs
+    % I_obs
 ;
 
 %----------------------------------------------------------------
@@ -425,41 +425,41 @@ varobs
 % stderr VARIABLE_NAME | corr VARIABLE_NAME_1, VARIABLE_NAME_2 | PARAMETER_NAME
 % , INITIAL_VALUE [, LOWER_BOUND, UPPER_BOUND ];
 
-estimated_params;
-    % --- Persistences --- %
-    % rho_A   ,   0.8     ,   0   ,   1   ;
-    rho_C   ,   0.8     ,   0   ,   1   ;
-    rho_I   ,   0.8     ,   0   ,   1   ;
-
-    % --- Std. Dev. --- %
-    stderr  eps_A       ,   0.01    ,   0.00001 ,   10      ;
-    stderr  eps_C       ,   0.01    ,   0.00001 ,   10      ;
-    stderr  eps_I       ,   0.01    ,   0.00001 ,   10      ;
-
-    % --- Marginal Costs --- %
-    phi_K   ,   0.01    ,   0       ,   20  ;
-    
-end;
+% estimated_params;
+%     % --- Persistences --- %
+%     % rho_A   ,   0.8     ,   0   ,   1   ;
+%     rho_C   ,   0.8     ,   0   ,   1   ;
+%     rho_I   ,   0.8     ,   0   ,   1   ;
+% 
+%     % --- Std. Dev. --- %
+%     stderr  eps_A       ,   0.01    ,   0.00001 ,   10      ;
+%     stderr  eps_C       ,   0.01    ,   0.00001 ,   10      ;
+%     stderr  eps_I       ,   0.01    ,   0.00001 ,   10      ;
+% 
+%     % --- Marginal Costs --- %
+%     phi_K   ,   0.01    ,   0       ,   20  ;
+% 
+% end;
 
 % ----------------------------------- %
 %   Estimation
 % ----------------------------------- %
 
-estimation( datafile        =   'Datos/DataCOL.xlsx'
-        ,   nobs            =   170 
-        ,   mode_compute    =   5
-        ,   mode_check
-        ,   smoother
-            );
+% estimation( datafile        =   'Datos/DataCOL.xlsx'
+%         ,   nobs            =   170 
+%         ,   mode_compute    =   5
+%         ,   mode_check
+%         ,   smoother
+%             );
 
 
 %----------------------------------------------------------------
 %  Shock Decomposition
 %---------------------------------------------------------------
 
-shock_decomposition(parameter_set   =   mle_mode
-                % ,   datafile        =   'Datos/DataCOL.xlsx'
-                ,   nobs            =   171
+shock_decomposition(parameter_set   =   calibration
+                ,   datafile        =   'Datos/DataCOL.xlsx'
+                % ,   nobs            =   171
                 ,   nograph
                     );
 
