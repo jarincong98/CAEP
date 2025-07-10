@@ -59,6 +59,10 @@ var
 %  Observables
 %---------------------------------------------------------------    
 
+    % --- Foreign Variables --- %
+    y_star_obs  $y^{\star,obs}$ (long_name = 'Observable Foreign Demand') 
+
+    % --- National Accounts --- %
     Y_obs     $Y^{obs}$ (long_name = 'Observable GDP')
     C_obs     $C^{obs}$ (long_name = 'Observable Consumption')
     I_obs     $I^{obs}$ (long_name = 'Observable Investment')
@@ -317,6 +321,11 @@ Z_I = Z_I(-1)^rho_I*exp(eps_I);
 %  Measurement Equations
 %---------------------------------------------------------------
 
+% --- Foreign Variables --- %
+[name = 'Measurement Eq: Foreign Demand']
+    y_star_obs = y_star;
+
+% --- National Accounts --- %    
 [name = 'Measurement Eq: GDP Obs']
     Y_obs = GDP;
 
@@ -393,9 +402,9 @@ steady;
 %---------------------------------------------------------------
 shocks;
 
-    var eps_A ; stderr 0.01 ;
+    % var eps_A ; stderr 0.01 ;
     % var eps_Pim_star = 0.01^2;
-    % var eps_y_star = 0.01^2;
+    var eps_y_star = 0.01^2;
     % var eps_P_star = 0.01^2;
     % var eps_C = 0.01^2;
     % var eps_I = 0.01^2;
@@ -408,7 +417,10 @@ end;
 %---------------------------------------------------------------
 
 varobs
-    Y_obs
+% --- Foreign Variables --- %
+    y_star_obs
+% --- National Accounts --- %
+    % Y_obs
     % C_obs
     % I_obs
 ;
@@ -459,14 +471,15 @@ varobs
 
 shock_decomposition(parameter_set   =   calibration
                 ,   datafile        =   'Datos/DataCOL.xlsx'
-                % ,   nobs            =   171
+                % ,   nobs            =   50
                 ,   nograph
                     );
 
 plot_shock_decomposition
-    Y_obs
-    C_obs
-    I_obs
+    y_star_obs
+    % Y_obs
+    % C_obs
+    % I_obs
 ;             
 
 
