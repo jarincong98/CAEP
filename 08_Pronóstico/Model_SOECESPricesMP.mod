@@ -426,13 +426,15 @@ steady;
 %  Shocks Standar Deviations
 %---------------------------------------------------------------
 shocks;
-
-    % var eps_A ; stderr 0.01 ;
+    % --- Exogenous Shocks --- %
     var eps_Pim_star = 0.01^2;
-    % var eps_y_star = 0.01^2;
-    % var eps_P_star = 0.01^2;
-    % var eps_C = 0.01^2;
-    % var eps_I = 0.01^2;
+    var eps_y_star = 0.01^2;
+    var eps_P_star = 0.01^2;
+    
+    % --- Structural Shocks --- %
+    var eps_A ; stderr 0.01 ;
+    var eps_C = 0.01^2;
+    var eps_I = 0.01^2;
     % var eps_inom = 0.01^2;
 
 end;
@@ -443,13 +445,13 @@ end;
 
 varobs
 % --- Foreign Variables --- %
-    % y_star_obs
-    % pi_star_obs
+    y_star_obs
+    pi_star_obs
     pi_im_star_obs
 % --- National Accounts --- %
-    % Y_obs
-    % C_obs
-    % I_obs
+    Y_obs
+    C_obs
+    I_obs
 ;
 
 %----------------------------------------------------------------
@@ -507,10 +509,10 @@ shock_decomposition(parameter_set   =   calibration
 plot_shock_decomposition
     % y_star_obs
     % pi_star_obs
-    pi_im_star_obs
-    % Y_obs
-    % C_obs
-    % I_obs
+    % pi_im_star_obs
+    Y_obs
+    C_obs
+    I_obs
 ;             
 
 

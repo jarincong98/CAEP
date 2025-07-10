@@ -1,5 +1,5 @@
 %% Hodrick Prescott Stuff
-
+clear; clc; 
 % Load data from the Excel file
 data = readtable('DataCOL.xlsx');
 
