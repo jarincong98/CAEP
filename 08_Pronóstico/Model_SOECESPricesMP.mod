@@ -60,8 +60,10 @@ var
 %---------------------------------------------------------------    
 
     % --- Foreign Variables --- %
-    y_star_obs  $y^{\star,obs}$     (long_name = 'Observable Foreign Demand') 
-    pi_star_obs $\pi^{\star,obs}$   (long_name = 'Observable Foreign Inflation')
+    y_star_obs      $y^{\star,obs}$     (long_name = 'Observable Foreign Demand') 
+    pi_star_obs     $\pi^{\star,obs}$   (long_name = 'Observable Foreign Inflation')
+    pi_im_star_obs  $\pi^{im\star,obs}$ (long_name = 'Observable Imports Inflation')
+
 
     % --- National Accounts --- %
     Y_obs     $Y^{obs}$ (long_name = 'Observable GDP')
@@ -131,6 +133,7 @@ parameters
     B_C_obs
     B_I_obs
     B_pi_star_obs
+    B_pi_im_star_obs
 ;
 
 
@@ -181,10 +184,11 @@ phi_y   = params(36);
 phi_P  = params(37);
 
     % --- Observables Discrepancy --- %
-    B_Y_obs         = 1.98925   ;
-    B_C_obs         = 1.74412   ;
-    B_I_obs         = 0.291099  ;
-    B_pi_star_obs   = 0.0063    ;
+    B_Y_obs             = 1.98925   ;
+    B_C_obs             = 1.74412   ;
+    B_I_obs             = 0.291099  ;
+    B_pi_star_obs       = 0.0063    ;
+    B_pi_im_star_obs    = -0.0052   ;
 
 %----------------------------------------------------------------
 % enter model equations
@@ -341,6 +345,9 @@ Z_I = Z_I(-1)^rho_I*exp(eps_I);
 [name = 'Measurement Eq: Foreign Inflation']    
     pi_star_obs = (P_star/P_star(-1) - 1) + B_pi_star_obs;
 
+[name = 'Measurement Eq: Foreign Inflation']    
+    pi_im_star_obs = (Pim_star/Pim_star(-1) - 1) + B_pi_im_star_obs;
+
 % --- National Accounts --- %    
 [name = 'Measurement Eq: GDP Obs']
     Y_obs = GDP - B_Y_obs;
@@ -421,9 +428,9 @@ steady;
 shocks;
 
     % var eps_A ; stderr 0.01 ;
-    % var eps_Pim_star = 0.01^2;
-    var eps_y_star = 0.01^2;
-    var eps_P_star = 0.01^2;
+    var eps_Pim_star = 0.01^2;
+    % var eps_y_star = 0.01^2;
+    % var eps_P_star = 0.01^2;
     % var eps_C = 0.01^2;
     % var eps_I = 0.01^2;
     % var eps_inom = 0.01^2;
@@ -436,8 +443,9 @@ end;
 
 varobs
 % --- Foreign Variables --- %
-    y_star_obs
-    pi_star_obs
+    % y_star_obs
+    % pi_star_obs
+    pi_im_star_obs
 % --- National Accounts --- %
     % Y_obs
     % C_obs
@@ -497,8 +505,9 @@ shock_decomposition(parameter_set   =   calibration
                     );
 
 plot_shock_decomposition
-    y_star_obs
-    pi_star_obs
+    % y_star_obs
+    % pi_star_obs
+    pi_im_star_obs
     % Y_obs
     % C_obs
     % I_obs
