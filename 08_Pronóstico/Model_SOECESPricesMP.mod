@@ -64,11 +64,13 @@ var
     pi_star_obs     $\pi^{\star,obs}$   (long_name = 'Observable Foreign Inflation')
     pi_im_star_obs  $\pi^{im\star,obs}$ (long_name = 'Observable Imports Inflation')
 
-
     % --- National Accounts --- %
     Y_obs     $Y^{obs}$ (long_name = 'Observable GDP')
     C_obs     $C^{obs}$ (long_name = 'Observable Consumption')
     I_obs     $I^{obs}$ (long_name = 'Observable Investment')
+
+    % --- Nominal Policy Rate --- %
+    i_nom_obs   $i^{nom,obs}$   (long_name = 'Observable nominal rate')
     
 ;
 
@@ -134,6 +136,7 @@ parameters
     B_I_obs
     B_pi_star_obs
     B_pi_im_star_obs
+    B_i_nom_obs
 ;
 
 
@@ -189,6 +192,7 @@ phi_P  = params(37);
     B_I_obs             = 0.291099  ;
     B_pi_star_obs       = 0.0063    ;
     B_pi_im_star_obs    = -0.0052   ;
+    B_i_nom_obs         = 0.0188    ;
 
 %----------------------------------------------------------------
 % enter model equations
@@ -340,23 +344,27 @@ Z_I = Z_I(-1)^rho_I*exp(eps_I);
 
 % --- Foreign Variables --- %
 [name = 'Measurement Eq: Foreign Demand']
-    y_star_obs = y_star - 1;
+    y_star_obs = y_star - 1 ;
 
 [name = 'Measurement Eq: Foreign Inflation']    
-    pi_star_obs = (P_star/P_star(-1) - 1) + B_pi_star_obs;
+    pi_star_obs = (P_star/P_star(-1) - 1) + B_pi_star_obs ;
 
 [name = 'Measurement Eq: Foreign Inflation']    
-    pi_im_star_obs = (Pim_star/Pim_star(-1) - 1) + B_pi_im_star_obs;
+    pi_im_star_obs = (Pim_star/Pim_star(-1) - 1) + B_pi_im_star_obs ;
 
 % --- National Accounts --- %    
 [name = 'Measurement Eq: GDP Obs']
-    Y_obs = GDP - B_Y_obs;
+    Y_obs = GDP - B_Y_obs ;
 
 [name = 'Measurement Eq: Consumption Obs']
-    C_obs = C - B_C_obs;
+    C_obs = C - B_C_obs ;
 
 [name = 'Measurement Eq: Investment Obs']
-    I_obs = I - B_I_obs;
+    I_obs = I - B_I_obs ;
+
+% --- Nominal Interest Rate --- %
+[name = 'Measurement Eq: Nominal Rate Obs']
+    i_nom_obs = (1 + i_nom)^4 - 1 - B_i_nom_obs ;
     
 end;
 
@@ -435,7 +443,7 @@ shocks;
     var eps_A ; stderr 0.01 ;
     var eps_C = 0.01^2;
     var eps_I = 0.01^2;
-    % var eps_inom = 0.01^2;
+    var eps_inom = 0.01^2;
 
 end;
 
@@ -452,6 +460,8 @@ varobs
     Y_obs
     C_obs
     I_obs
+% --- Nominal Interest Rate --- %    
+    i_nom_obs
 ;
 
 %----------------------------------------------------------------
@@ -513,6 +523,7 @@ plot_shock_decomposition
     Y_obs
     C_obs
     I_obs
+    i_nom_obs
 ;             
 
 
