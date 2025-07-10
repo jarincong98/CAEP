@@ -449,10 +449,10 @@ shocks;
     var eps_P_star      ;   stderr  0.0052  ;
     
     % --- Structural Shocks --- %
-    var eps_A   ;   stderr  0.01    ;
-    var eps_C   ;   stderr  0.01    ;
-    var eps_I   ;   stderr  0.01    ;
-    % var eps_inom = 0.01^2;
+    % var eps_A   ;   stderr  0.01    ;
+    % var eps_C   ;   stderr  0.01    ;
+    % var eps_I   ;   stderr  0.01    ;
+    % var eps_inom;   stderr  0.01    ;
 
 end;
 
@@ -466,13 +466,13 @@ varobs
     pi_star_obs
     pi_im_star_obs
 % --- National Accounts --- %
-    Y_obs
+    % Y_obs
     C_obs
     I_obs
 % --- Nominal Interest Rate --- %    
-    % i_nom_obs
+    i_nom_obs
 % --- Headline inflation --- %
-    % pi_obs
+    pi_obs
 ;
 
 %----------------------------------------------------------------
@@ -503,6 +503,7 @@ estimated_params;
     stderr  eps_A       ,   0.01    ,   0.00001 ,   10      ;
     stderr  eps_C       ,   0.01    ,   0.00001 ,   10      ;
     stderr  eps_I       ,   0.01    ,   0.00001 ,   10      ;
+    stderr  eps_inom    ,   0.01    ,   0.00001 ,   10      ;
 
     % --- Marginal Costs --- %
     phi_K   ,   0.01    ,   0       ,   20  ;
@@ -513,37 +514,66 @@ end;
 %   Estimation
 % ----------------------------------- %
 
+% estimation( datafile        =   'Datos/DataCOL.xlsx'
+%         ,   nobs            =   80
+%         ,   mode_compute    =   5
+%         ,   mode_check
+%         ,   smoother
+%         ,   nograph
+%             );
+
+% --------------------------------------- %
+%   Filtering (loading estimated mode) 
+% --------------------------------------- %            
+
 estimation( datafile        =   'Datos/DataCOL.xlsx'
-        ,   nobs            =   80
-        ,   mode_compute    =   5
-        ,   mode_check
+        ,   mode_file       =   'Model_SOECESPricesMP/Output/Model_SOECESPricesMP_mode.mat'
+        % ,   nobs            =   80
+        ,   mode_compute    =   0
+        % ,   mode_check
         ,   smoother
         ,   nograph
             );
 
+%----------------------------------------------------------------
+%  Conditional Forecast
+%---------------------------------------------------------------          
+
+% conditional_forecast_paths;
+%     var         pi_obs      ;
+%     periods     1:10        ;
+%     values      10          ;   
+% end;
+% 
+% conditional_forecast(controlled_varexo = eps_A
+%                     );
 
 %----------------------------------------------------------------
 %  Shock Decomposition
 %---------------------------------------------------------------
 options_.initial_date = dates('2000Q1');
 
-shock_decomposition(parameter_set   =   mle_mode
-                ,   datafile        =   'Datos/DataCOL.xlsx'
-                ,   first_obs       =   1
-                ,   nobs            =   80
-                ,   nograph
+shock_decomposition(nograph
+                % ,   datafile        =   'Datos/DataCOL.xlsx'
+                % ,   parameter_set   =   mle_mode
+                % ,   first_obs       =   1
+                % ,   nobs            =   80
                     );
 
-% plot_shock_decomposition
-%     % y_star_obs
-%     pi_star_obs
-%     % pi_im_star_obs
-%     % Y_obs
-%     % C_obs
-%     % I_obs
-%     % i_nom_obs
-%     % pi_obs
-% ;             
+plot_shock_decomposition(   plot_init_date = dates('2015Q1')
+                    ,       plot_end_date  = dates('2024Q2')
+
+                        )
+    y_star_obs
+    % pi_star_obs
+    % pi_im_star_obs
+    Y_obs
+    % C_obs
+    % I_obs
+    pi_obs
+    i_nom_obs
+
+;             
 
 
 %----------------------------------------------------------------
